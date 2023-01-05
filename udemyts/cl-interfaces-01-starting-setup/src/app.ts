@@ -1,42 +1,50 @@
-// Code goes here!
+// Interface
 
-//class field
-class Department {
-    // private readonly id: string ---> this means "readonly" that it won't change
-    // name: string
-    //-- you use private when you work in a team and want a clean code --//
-    private employees: string[] = []
+//=== We need a interface bec interface can be used to describe the structure of an object which is clearer ===//
+// Note also you can use a class  with interface //
 
+// type AddFn = ( a: number, b: number) => number
+//THIS is another way using interface
+interface AddFn {
+    (a: number, b: number): number
+}
 
-    //-- This part is a function
-    //-- This is a short cut to make the code smaller private id: string, public name: string---//
-    constructor(private id: string, public name: string){
-        // this.name = n
+let add: AddFn
+add = ( n1:number, n2: number) => {
+ return n1 + n2
+}
+
+interface Named{
+    readonly name: string
+    //--The ? at the end tells Ts this is optional--//
+    outputName?: string
+}
+
+//-- With interface you can inherent more than one  ex: interface Greetable extends Named, AntherThing--//
+interface Greetable extends Named{
+    //-- you can also add the readonly modifier BUT NOT private or public
+    // readonly name: string
+    age: number
+
+    //-- We can add a method---//
+    greet(phrase: string): void
+}
+
+class Person implements Greetable {
+    name: string
+    age = 9
+
+    constructor(n:string){
+        this.name = n
     }
-    //-- Here are methods you can name it
-    
-    describe(){
-        console.log(`Department (${this.id}): ${this.name}`)// --> you have to use this. to get something inside the class when you use a method
-        
-    }
 
-    addEmployees(employee: string){
-        this.employees.push(employee)
-    }
-
-    printEmployeeInformation(){
-        console.log(this.employees.length);
-        console.log(this.employees);
-        
-        
+    greet(phrase: string) {
+        console.log(phrase + " " + this.name);
     }
 }
 
-//-- Now the construction is being called here in the new Department("Accounting")---//
-const accounting = new Department("f3","Accounting")
+let user1: Greetable
 
-accounting.describe()
+user1 = new Person("Jane")
 
-accounting.addEmployees("Jane")
-accounting.addEmployees("Zuzu")
-accounting.printEmployeeInformation()
+user1.greet("Hi there - I am ")
