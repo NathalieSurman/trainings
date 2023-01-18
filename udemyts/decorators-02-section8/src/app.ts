@@ -1,7 +1,7 @@
 
 //===== Decorators ===========//
 //--NOTE: if you want to use Decorators in ur projects make sure you go to the tsconfig.json file to turn theses on appropriately --
-//-- make sure this is  "target": "es6" then ---> ,"experimentalDecorators": true comment in  ---//
+//-- make sure this is  "target": "es6" then ---> ,"experimentalDecorators": true is comment in include the comma in front ---//
 // function Logger(constructor: Function) {
 //   console.log('Logging...');
 //   console.log(constructor);
@@ -127,9 +127,12 @@ class Product {
 const p1 = new Product('Book', 19);
 const p2 = new Product('Book 2', 29);
 
+//--Autobind decorator---//
 function Autobind(_:any, _2: string, descriptor: PropertyDescriptor){
+     //--We want to store the method we originally defined--//
   const originalMethod = descriptor.value
   const adjDescriptor: PropertyDescriptor = {
+     //--We set configurable to true so that we can always change it--//
     configurable: true,
     enumerable: false,
     get() {
