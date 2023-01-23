@@ -1,14 +1,17 @@
 //--Note: Webpack uses Node.js ---//
+//-- Webpack helps us to bundle our different files into one bundle --//
 
 const path = require('path');
 
 module.exports = {
+  mode: "development", 
   entry: './src/app.ts',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: "dist"
   },
-  devtool: 'inline-source-map',
+  devtool: 'inline-source-map',//-- this helps with errors and debugging --//
   //--module is just telling Webpack how to deal with the files --//
   module: {
     rules: [
